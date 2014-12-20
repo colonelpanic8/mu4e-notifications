@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>mu4e-notifications</title>
-<!-- 2014-12-20 Sat 00:22 -->
+<!-- 2014-12-20 Sat 06:06 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Ivan Malison" />
@@ -224,7 +224,7 @@ Which means that this guide is OSX (10.9+ since advanced terminal-notifier featu
 <div class="outline-text-4" id="text-1-1-3">
 <p>
 This method talks to emacs using emacsclient -e to execute code in the emacs session, which requires that you run your emacs session using <code>emacs --daemon</code> (or using <code>M-x start-server</code> once emacs is already started) and <code>emacsclient</code>. You should already be doing this anyway.
-Cocoa emacs, though not strictly required, is needed in order to provide a bundle target to terminal-notifier to switch the focus to.
+Cocoa emacs, though not strictly required, is needed in order to provide a bundle target to terminal-notifier to switch the focus to. 
 </p>
 </div>
 </div>
@@ -252,6 +252,36 @@ The author currently uses offlineimap, but using another system (such as mbsync/
 <pre class="src src-sh">brew install offlineimap
 </pre>
 </div>
+<p>
+Here is an example offline imap configuration:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #99d1ce;">[</span>general<span style="color: #99d1ce;">]</span>
+<span style="color: #599cab;">accounts</span> = Gmail
+<span style="color: #599cab;">maxsyncaccounts</span> = 3
+
+<span style="color: #99d1ce;">[</span>Account Gmail<span style="color: #99d1ce;">]</span>
+<span style="color: #599cab;">localrepository</span> = Local
+<span style="color: #599cab;">remoterepository</span> = Remote
+
+<span style="color: #99d1ce;">[</span>Repository Local<span style="color: #99d1ce;">]</span>
+<span style="color: #d26937;">type</span> = Maildir
+<span style="color: #599cab;">localfolders</span> = ~/Mail
+
+<span style="color: #99d1ce;">[</span>Repository Remote<span style="color: #99d1ce;">]</span>
+<span style="color: #d26937;">type</span> = IMAP
+<span style="color: #599cab;">remotehost</span> = imap.gmail.com
+<span style="color: #599cab;">remoteuser</span> = username@gmail.com
+<span style="color: #599cab;">remotepass</span> = password
+<span style="color: #599cab;">folderfilter</span> = <span style="color: #195466; font-weight: bold;">lambda</span> folder: folder <span style="color: #195466; font-weight: bold;">in</span> <span style="color: #99d1ce;">[</span><span style="color: #2aa889;">"INBOX"</span>, <span style="color: #2aa889;">"Starred"</span>, <span style="color: #2aa889;">"All Mail"</span>, <span style="color: #2aa889;">"[Gmail]/All Mail"</span><span style="color: #99d1ce;">]</span>
+<span style="color: #599cab;">maxconnections</span> = 3
+<span style="color: #599cab;">realdelete</span> = no
+<span style="color: #245361;"># </span><span style="color: #245361;">You will need to generate your own certificates file</span>
+<span style="color: #599cab;">sslcacertfile</span> = ~/certificates.pem
+<span style="color: #599cab;">ssl</span> = yes
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -262,7 +292,7 @@ The author currently uses offlineimap, but using another system (such as mbsync/
 <h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Talking to emacs</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
-Ensure that you can talk to your running emacs instance using emacsclient. Choose one of the two following methods:
+Ensure that you can talk to your running emacs instance using emacsclient. Choose one of the two following methods to define an execute<sub>elisp</sub> function that will run elisp through emacsclient:
 </p>
 </div>
 <ol class="org-ol"><li><a id="sec-1-2-1-1" name="sec-1-2-1-1"></a>Using emacsclient by itself<br  /><div class="outline-text-5" id="text-1-2-1-1">
@@ -337,13 +367,12 @@ Add the following functions to your shells configuration file (<code>.bashrc</co
     <span style="color: #d26937;">local</span> <span style="color: #599cab;">mu4e_message_id</span>=<span style="color: #2aa889;">"$(mu4e_get_msg_id_from_file $1)"</span>
     <span style="color: #d26937;">local</span> <span style="color: #599cab;">view_file_command</span>=<span style="color: #2aa889;">"$(which zsh) -c \"refresh_config &amp;&amp; mu4e_view_message $mu4e_message_id\""</span>
     <span style="color: #d26937;">local</span> <span style="color: #599cab;">app_icon_argument</span>=<span style="color: #2aa889;">''</span>
-    test -e <span style="color: #2aa889;">"$APP_ICON"</span> &amp;&amp; <span style="color: #599cab;">app_icon_argument</span>=<span style="color: #2aa889;">"-appIcon '$APP_ICON'"</span>
+    test -e <span style="color: #2aa889;">"$APP_ICON"</span> &amp;&amp; <span style="color: #599cab;">app_icon_argument</span>=<span style="color: #2aa889;">"-appIcon \"$APP_ICON\""</span>
     reattach-to-user-namespace $<span style="color: #c23127;">(</span><span style="color: #d26937;">which</span> terminal-notifier<span style="color: #c23127;">)</span> <span style="color: #2aa889;">\</span>
         -title <span style="color: #2aa889;">"$title"</span> <span style="color: #2aa889;">\</span>
         -message <span style="color: #2aa889;">"$subject"</span> <span style="color: #2aa889;">\</span>
         -execute <span style="color: #2aa889;">"$view_file_command"</span> <span style="color: #2aa889;">\</span>
-        -activate <span style="color: #2aa889;">"org.gnu.Emacs"</span> <span style="color: #2aa889;">\</span>
-        $<span style="color: #599cab;">app_icon_argument</span>
+        -activate <span style="color: #2aa889;">"org.gnu.Emacs"</span> $<span style="color: #599cab;">app_icon_argument</span>
 <span style="color: #99d1ce;">}</span>
 
 <span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">mu4e_update_index</span> <span style="color: #99d1ce;">{</span>
@@ -374,6 +403,7 @@ Add the following functions to your shells configuration file (<code>.bashrc</co
 </div>
 <p>
 Make sure to configure the <code>MAILDIR</code> and <code>SYNC_COMMAND</code> environment variables to match your configuration. Also, make sure that <code>execute_elisp</code>, the function defined in the previous section is available whenever these functions are called.
+You can check out the author's (moderately personalized) versions of these functions <a href="https://raw.githubusercontent.com/IvanMalison/dotfiles/master/dotfiles/lib/shellrc/mu4e.sh">here</a>.
 </p>
 </div>
 <ol class="org-ol"><li><a id="sec-1-2-2-1" name="sec-1-2-2-1"></a>Testing alerting<br  /><div class="outline-text-5" id="text-1-2-2-1">
@@ -442,7 +472,7 @@ Test alerting as before, but this time click on one of the notifications. The op
 <h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> Make a LaunchAgent</h4>
 <div class="outline-text-4" id="text-1-2-4">
 <p>
-Save the following to <code>$HOME/Library/LaunchAgents/org.imalison.mu4e-update-mail</code> (make sure to give it <code>chmod 644</code> permissions)
+Save the following to <code>$HOME/Library/LaunchAgents/org.imalison.mu4e-update-mail</code> (make sure to give it <code>chmod 644</code> permissions). If zsh is not your shell of choice, substitute as appropriate. 
 </p>
 <div class="org-src-container">
 
@@ -468,6 +498,9 @@ Save the following to <code>$HOME/Library/LaunchAgents/org.imalison.mu4e-update-
 &lt;/<span style="color: #599cab;">plist</span>&gt;
 </pre>
 </div>
+<p>
+Check out my version of this plist <a href="https://raw.githubusercontent.com/IvanMalison/dotfiles/master/resources/org.imalison.mu4e-update-mail.plist">here</a>.
+</p>
 
 <p>
 Typically, you need to log in and log out to have launchd load a new launchagent. You can also use the following functions to reload any launchagent:
@@ -498,7 +531,7 @@ Typically, you need to log in and log out to have launchd load a new launchagent
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Ivan Malison</p>
-<p class="date">Created: 2014-12-20 Sat 00:22</p>
+<p class="date">Created: 2014-12-20 Sat 06:06</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

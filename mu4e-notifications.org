@@ -24,7 +24,7 @@ insert link about mu4e configuration
 #+END_SRC
 *** Cocoa emacs, emacsclient
     This method talks to emacs using emacsclient -e to execute code in the emacs session, which requires that you run your emacs session using ~emacs --daemon~ (or using ~M-x start-server~ once emacs is already started) and ~emacsclient~. You should already be doing this anyway.
-    Cocoa emacs, though not strictly required, is needed in order to provide a bundle target to terminal-notifier to switch the focus to.
+    Cocoa emacs, though not strictly required, is needed in order to provide a bundle target to terminal-notifier to switch the focus to. 
 *** reattach-to-user-namespace
     This is needed to be able to send notifications from a process that was started outside of the user's GUI login session in MacOSX. You can also get this from homebrew
 #+BEGIN_SRC sh
@@ -35,9 +35,35 @@ insert link about mu4e configuration
 #+BEGIN_SRC sh
   brew install offlineimap
 #+END_SRC
+Here is an example offline imap configuration:
+#+BEGIN_SRC python
+  [general]
+  accounts = Gmail
+  maxsyncaccounts = 3
+
+  [Account Gmail]
+  localrepository = Local
+  remoterepository = Remote
+
+  [Repository Local]
+  type = Maildir
+  localfolders = ~/Mail
+
+  [Repository Remote]
+  type = IMAP
+  remotehost = imap.gmail.com
+  remoteuser = username@gmail.com
+  remotepass = password
+  folderfilter = lambda folder: folder in ["INBOX", "Starred", "All Mail", "[Gmail]/All Mail"]
+  maxconnections = 3
+  realdelete = no
+  # You will need to generate your own certificates file
+  sslcacertfile = ~/certificates.pem
+  ssl = yes
+#+END_SRC
 ** Setup
 *** Talking to emacs
-Ensure that you can talk to your running emacs instance using emacsclient. Choose one of the two following methods:
+Ensure that you can talk to your running emacs instance using emacsclient. Choose one of the two following methods to define an execute_elisp function that will run elisp through emacsclient:
 **** Using emacsclient by itself
 If you prefer not to use ~server-use-tcp~ (as described below) you must define the shell function ~execute_elisp~ to run code in your existing emacs session. Typically, this will simply look like 
 #+BEGIN_SRC sh
@@ -86,13 +112,12 @@ Add the following functions to your shells configuration file (~.bashrc~ if you 
       local mu4e_message_id="$(mu4e_get_msg_id_from_file $1)"
       local view_file_command="$(which zsh) -c \"refresh_config && mu4e_view_message $mu4e_message_id\""
       local app_icon_argument=''
-      test -e "$APP_ICON" && app_icon_argument="-appIcon '$APP_ICON'"
+      test -e "$APP_ICON" && app_icon_argument="-appIcon \"$APP_ICON\""
       reattach-to-user-namespace $(which terminal-notifier) \
           -title "$title" \
           -message "$subject" \
           -execute "$view_file_command" \
-          -activate "org.gnu.Emacs" \
-          $app_icon_argument
+          -activate "org.gnu.Emacs" $app_icon_argument
   }
 
   function mu4e_update_index {
@@ -121,6 +146,7 @@ Add the following functions to your shells configuration file (~.bashrc~ if you 
   }
 #+END_SRC
 Make sure to configure the ~MAILDIR~ and ~SYNC_COMMAND~ environment variables to match your configuration. Also, make sure that ~execute_elisp~, the function defined in the previous section is available whenever these functions are called.
+You can check out the author's (moderately personalized) versions of these functions [[https://raw.githubusercontent.com/IvanMalison/dotfiles/master/dotfiles/lib/shellrc/mu4e.sh][here]].
 **** Testing alerting
      To make sure that everything is working, send yourself some mail that will end up in whatever you set as ~$MAILDIR~, and run the ~mu4e_update_mail~ command. You should see some notification center popups. Don't try clicking on them just yet.
 
@@ -167,7 +193,7 @@ Until [[https://github.com/djcb/mu/issues/547][this issue]] is resolved, you nee
 **** Testing alerting
      Test alerting as before, but this time click on one of the notifications. The operating systems focus should be shifted to emacs, and the relevant email should be displayed.
 *** Make a LaunchAgent
-Save the following to ~$HOME/Library/LaunchAgents/org.imalison.mu4e-update-mail~ (make sure to give it ~chmod 644~ permissions)
+Save the following to ~$HOME/Library/LaunchAgents/org.imalison.mu4e-update-mail~ (make sure to give it ~chmod 644~ permissions). If zsh is not your shell of choice, substitute as appropriate. 
 #+BEGIN_SRC xml
   <?xml version="1.0" encoding="UTF-8"?>
   <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -190,6 +216,7 @@ Save the following to ~$HOME/Library/LaunchAgents/org.imalison.mu4e-update-mail~
   </dict>
   </plist>
 #+END_SRC
+Check out my version of this plist [[https://raw.githubusercontent.com/IvanMalison/dotfiles/master/resources/org.imalison.mu4e-update-mail.plist][here]].
 
 Typically, you need to log in and log out to have launchd load a new launchagent. You can also use the following functions to reload any launchagent:
 #+BEGIN_SRC sh
