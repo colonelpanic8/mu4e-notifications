@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>mu4e-notifications</title>
-<!-- 2014-12-19 Fri 23:00 -->
+<!-- 2014-12-20 Sat 00:22 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Ivan Malison" />
@@ -337,7 +337,7 @@ Add the following functions to your shells configuration file (<code>.bashrc</co
     <span style="color: #d26937;">local</span> <span style="color: #599cab;">mu4e_message_id</span>=<span style="color: #2aa889;">"$(mu4e_get_msg_id_from_file $1)"</span>
     <span style="color: #d26937;">local</span> <span style="color: #599cab;">view_file_command</span>=<span style="color: #2aa889;">"$(which zsh) -c \"refresh_config &amp;&amp; mu4e_view_message $mu4e_message_id\""</span>
     <span style="color: #d26937;">local</span> <span style="color: #599cab;">app_icon_argument</span>=<span style="color: #2aa889;">''</span>
-    test -e <span style="color: #2aa889;">"$APP_ICON"</span> &amp;&amp; <span style="color: #599cab;">app_icon_argument</span> = <span style="color: #2aa889;">"-appIcon '$APP_ICON'"</span>
+    test -e <span style="color: #2aa889;">"$APP_ICON"</span> &amp;&amp; <span style="color: #599cab;">app_icon_argument</span>=<span style="color: #2aa889;">"-appIcon '$APP_ICON'"</span>
     reattach-to-user-namespace $<span style="color: #c23127;">(</span><span style="color: #d26937;">which</span> terminal-notifier<span style="color: #c23127;">)</span> <span style="color: #2aa889;">\</span>
         -title <span style="color: #2aa889;">"$title"</span> <span style="color: #2aa889;">\</span>
         -message <span style="color: #2aa889;">"$subject"</span> <span style="color: #2aa889;">\</span>
@@ -498,7 +498,7 @@ Typically, you need to log in and log out to have launchd load a new launchagent
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Ivan Malison</p>
-<p class="date">Created: 2014-12-19 Fri 23:00</p>
+<p class="date">Created: 2014-12-20 Sat 00:22</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
