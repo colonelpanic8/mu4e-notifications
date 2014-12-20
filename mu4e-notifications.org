@@ -1,5 +1,5 @@
 * mu4e-notifications
-This document describes a method to enable desktop notifications that open the message to which they are associated in mu4e. 
+This document describes a method to enable desktop notifications that open the message to which they are associated in mu4e. Since you are an emacs user, I recommend that you read this guide as an org-mode file. Get the org-mode version of this document [[https://raw.githubusercontent.com/IvanMalison/mu4e-notifications/master/mu4e-notifications.org][here]]. 
 
 ** Assumptions/Dependencies
 *** mu/mu4e
