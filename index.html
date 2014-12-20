@@ -1,1 +1,506 @@
-mu4e-notifications.html
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>mu4e-notifications</title>
+<!-- 2014-12-20 Sat 00:22 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Ivan Malison" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">mu4e-notifications</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. mu4e-notifications</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Assumptions/Dependencies</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. mu/mu4e</a></li>
+<li><a href="#sec-1-1-2">1.1.2. terminal-notifier</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Cocoa emacs, emacsclient</a></li>
+<li><a href="#sec-1-1-4">1.1.4. reattach-to-user-namespace</a></li>
+<li><a href="#sec-1-1-5">1.1.5. Maildir synchronization system</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. Setup</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1. Talking to emacs</a></li>
+<li><a href="#sec-1-2-2">1.2.2. Alerting</a></li>
+<li><a href="#sec-1-2-3">1.2.3. mu4e Patch</a></li>
+<li><a href="#sec-1-2-4">1.2.4. Make a LaunchAgent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> mu4e-notifications</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This document describes a method to enable desktop notifications that open the message to which they are associated in mu4e. Since you are an emacs user, I recommend that you read this guide as an org-mode file. Get the org-mode version of this document <a href="https://raw.githubusercontent.com/IvanMalison/mu4e-notifications/master/mu4e-notifications.org">here</a>. 
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Assumptions/Dependencies</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> mu/mu4e</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+You can get mu with mu4e from homebrew using:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">brew install mu --with-emacs
+</pre>
+</div>
+<p>
+Make sure to add the mu4e source directory to your load path. If you installed using homebrew, you can use the following snippet to do so:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #99d1ce;">(</span>add-to-list 'load-path
+ <span style="color: #c23127;">(</span>concat <span style="color: #33859e;">(</span>replace-regexp-in-string <span style="color: #2aa889;">"\n"</span> <span style="color: #2aa889;">""</span> <span style="color: #d26937;">(</span>shell-command-to-string <span style="color: #2aa889;">"echo $(brew --prefix mu)"</span><span style="color: #d26937;">)</span><span style="color: #33859e;">)</span>
+         <span style="color: #2aa889;">"/share/emacs/site-lisp/mu4e"</span><span style="color: #c23127;">)</span><span style="color: #99d1ce;">)</span>
+<span style="color: #99d1ce;">(</span><span style="color: #195466; font-weight: bold;">require</span> '<span style="color: #33859e; font-weight: bold;">mu4e</span><span style="color: #99d1ce;">)</span>
+</pre>
+</div>
+<p>
+If you use jwiegley's use-package instead of a raw require, make sure that <code>mu4e-view-message-with-msgid</code> triggers the loading of mu4e.
+insert link about mu4e configuration
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> terminal-notifier</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+Which means that this guide is OSX (10.9+ since advanced terminal-notifier features are used) specific (though it should be relatively easy to generalize this procedure to other environments like Linux with GNOME or KDE). You can install terminal-notifier with homebrew:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">brew install terminal-notifier
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Cocoa emacs, emacsclient</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<p>
+This method talks to emacs using emacsclient -e to execute code in the emacs session, which requires that you run your emacs session using <code>emacs --daemon</code> (or using <code>M-x start-server</code> once emacs is already started) and <code>emacsclient</code>. You should already be doing this anyway.
+Cocoa emacs, though not strictly required, is needed in order to provide a bundle target to terminal-notifier to switch the focus to.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> reattach-to-user-namespace</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<p>
+This is needed to be able to send notifications from a process that was started outside of the user's GUI login session in MacOSX. You can also get this from homebrew
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">brew install reattach-to-user-namespace
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-1-5" class="outline-4">
+<h4 id="sec-1-1-5"><span class="section-number-4">1.1.5</span> Maildir synchronization system</h4>
+<div class="outline-text-4" id="text-1-1-5">
+<p>
+The author currently uses offlineimap, but using another system (such as mbsync/isync) should be as simple as changing an environment variable. You can get both offlineimap and isync from homebrew:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">brew install offlineimap
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Setup</h3>
+<div class="outline-text-3" id="text-1-2">
+</div><div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Talking to emacs</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+Ensure that you can talk to your running emacs instance using emacsclient. Choose one of the two following methods:
+</p>
+</div>
+<ol class="org-ol"><li><a id="sec-1-2-1-1" name="sec-1-2-1-1"></a>Using emacsclient by itself<br  /><div class="outline-text-5" id="text-1-2-1-1">
+<p>
+If you prefer not to use <code>server-use-tcp</code> (as described below) you must define the shell function <code>execute_elisp</code> to run code in your existing emacs session. Typically, this will simply look like 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #d26937;">alias</span> <span style="color: #599cab;">execute_elisp</span>=<span style="color: #2aa889;">'emacsclient -e'</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="sec-1-2-1-2" name="sec-1-2-1-2"></a>Using server-file-name and server-use-tcp<br  /><div class="outline-text-5" id="text-1-2-1-2">
+<p>
+The author puts the following:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #99d1ce;">(</span>setq server-use-tcp t<span style="color: #99d1ce;">)</span>
+</pre>
+</div>
+<p>
+in their emacs configuration, which makes it so that when <code>emacs --daemon=server-file-name</code> is used to start the emacs daemon, a server-file with the name <code>server-file-name</code> is added to <code>$HOME/.emacs.d/server</code>. If you do this, you can use the following functions to communicate with your emacs instances:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">execute_elisp</span> <span style="color: #99d1ce;">{</span>
+    emacs_get_running_instances | xargs -I svr-filename emacsclient --server-file=svr-filename -e <span style="color: #2aa889;">"$1"</span>
+<span style="color: #99d1ce;">}</span>
+
+<span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">emacs_pids</span> <span style="color: #99d1ce;">{</span>
+    <span style="color: #245361;"># </span><span style="color: #245361;">If -i causes errors (as it can with some versions of pgrep), you can use</span>
+    <span style="color: #245361;"># </span><span style="color: #245361;">ps aux | grep emacs | grep -v grep | awk '{print $2}'</span>
+    pgrep -i emacs
+<span style="color: #99d1ce;">}</span>
+
+<span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">emacs_get_running_instances</span> <span style="color: #99d1ce;">{</span>
+    emacs_pids | xargs ps -o command -p | egrep -o <span style="color: #2aa889;">" --daemon=(.*)"</span> | awk -F= <span style="color: #2aa889;">'{print $2}'</span> | sed <span style="color: #2aa889;">'s/\^J3,4\^J//'</span>
+<span style="color: #99d1ce;">}</span>
+</pre>
+</div>
+<p>
+See <a href="https://raw.githubusercontent.com/IvanMalison/dotfiles/master/dotfiles/lib/shellenv/emacs.sh">my emacs shell functions</a> for more details about how to get this type of setup working.
+</p>
+</div>
+</li></ol>
+</div>
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Alerting</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+Add the following functions to your shells configuration file (<code>.bashrc</code> if you use bash), or otherwise make them accesible from your shell of choice:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #599cab;">MAILDIR</span>=<span style="color: #2aa889;">"$HOME/Mail/INBOX"</span>
+<span style="color: #599cab;">SYNC_STAMP</span>=<span style="color: #2aa889;">"$HOME/.mail-sync"</span>
+<span style="color: #599cab;">APP_ICON</span>=<span style="color: #2aa889;">"$HOME/gmail_logo.png"</span> 
+<span style="color: #599cab;">SYNC_COMMAND</span>=<span style="color: #2aa889;">"offlineimap"</span>
+
+<span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">mu4e_update_mail</span> <span style="color: #99d1ce;">{</span>
+    $<span style="color: #599cab;">SYNC_COMMAND</span>
+    mu4e_update_index
+    mu4e_alerts
+<span style="color: #99d1ce;">}</span>
+
+<span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">mu4e_alert_for_filename</span> <span style="color: #99d1ce;">{</span>
+    <span style="color: #d26937;">local</span> <span style="color: #599cab;">message</span>=<span style="color: #2aa889;">"$(mu view $1 | grep -B 10 Date)"</span>
+    <span style="color: #d26937;">local</span> <span style="color: #599cab;">title</span>=<span style="color: #2aa889;">"$(echo $message | grep From | sed 's/From: //')"</span>
+    <span style="color: #d26937;">local</span> <span style="color: #599cab;">subject</span>=<span style="color: #2aa889;">"$(echo $message | grep Subject | sed 's/Subject: //')"</span>
+    <span style="color: #d26937;">local</span> <span style="color: #599cab;">mu4e_message_id</span>=<span style="color: #2aa889;">"$(mu4e_get_msg_id_from_file $1)"</span>
+    <span style="color: #d26937;">local</span> <span style="color: #599cab;">view_file_command</span>=<span style="color: #2aa889;">"$(which zsh) -c \"refresh_config &amp;&amp; mu4e_view_message $mu4e_message_id\""</span>
+    <span style="color: #d26937;">local</span> <span style="color: #599cab;">app_icon_argument</span>=<span style="color: #2aa889;">''</span>
+    test -e <span style="color: #2aa889;">"$APP_ICON"</span> &amp;&amp; <span style="color: #599cab;">app_icon_argument</span>=<span style="color: #2aa889;">"-appIcon '$APP_ICON'"</span>
+    reattach-to-user-namespace $<span style="color: #c23127;">(</span><span style="color: #d26937;">which</span> terminal-notifier<span style="color: #c23127;">)</span> <span style="color: #2aa889;">\</span>
+        -title <span style="color: #2aa889;">"$title"</span> <span style="color: #2aa889;">\</span>
+        -message <span style="color: #2aa889;">"$subject"</span> <span style="color: #2aa889;">\</span>
+        -execute <span style="color: #2aa889;">"$view_file_command"</span> <span style="color: #2aa889;">\</span>
+        -activate <span style="color: #2aa889;">"org.gnu.Emacs"</span> <span style="color: #2aa889;">\</span>
+        $<span style="color: #599cab;">app_icon_argument</span>
+<span style="color: #99d1ce;">}</span>
+
+<span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">mu4e_update_index</span> <span style="color: #99d1ce;">{</span>
+    execute_elisp <span style="color: #2aa889;">"(mu4e-update-index)"</span>
+<span style="color: #99d1ce;">}</span>
+
+<span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">mu4e_alerts</span> <span style="color: #99d1ce;">{</span>
+    test -e $<span style="color: #599cab;">SYNC_STAMP</span> || touch $<span style="color: #599cab;">SYNC_STAMP</span>
+    touch <span style="color: #2aa889;">"${SYNC_STAMP}.in-progress"</span>
+    <span style="color: #195466; font-weight: bold;">for</span> f<span style="color: #195466; font-weight: bold;"> in</span> $<span style="color: #c23127;">(</span>find <span style="color: #2aa889;">"$MAILDIR"</span> -cnewer <span style="color: #2aa889;">"$SYNC_STAMP"</span> -a -type f<span style="color: #c23127;">)</span>; <span style="color: #195466; font-weight: bold;">do</span>
+        mu4e_alert_for_filename $<span style="color: #599cab;">f</span>
+    <span style="color: #195466; font-weight: bold;">done</span>
+    mv <span style="color: #2aa889;">"${SYNC_STAMP}.in-progress"</span> $<span style="color: #599cab;">SYNC_STAMP</span>
+<span style="color: #99d1ce;">}</span>
+
+<span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">mu4e_get_msg_id_from_file</span> <span style="color: #99d1ce;">{</span>
+    mu view $<span style="color: #599cab;">1</span> -o sexp | grep <span style="color: #2aa889;">"message-id"</span> | awk <span style="color: #2aa889;">'{print $2}'</span> | sed <span style="color: #2aa889;">'s/"//g'</span>
+<span style="color: #99d1ce;">}</span>
+
+<span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">mu4e_view_message_from_file</span> <span style="color: #99d1ce;">{</span>
+    mu4e_view_message <span style="color: #2aa889;">"$(mu4e_get_msg_id_from_file $1)"</span>
+<span style="color: #99d1ce;">}</span>
+
+<span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">mu4e_view_message</span> <span style="color: #99d1ce;">{</span>
+    execute_elisp <span style="color: #2aa889;">"(mu4e-view-message-with-msgid \"$1\")"</span>
+<span style="color: #99d1ce;">}</span>
+</pre>
+</div>
+<p>
+Make sure to configure the <code>MAILDIR</code> and <code>SYNC_COMMAND</code> environment variables to match your configuration. Also, make sure that <code>execute_elisp</code>, the function defined in the previous section is available whenever these functions are called.
+</p>
+</div>
+<ol class="org-ol"><li><a id="sec-1-2-2-1" name="sec-1-2-2-1"></a>Testing alerting<br  /><div class="outline-text-5" id="text-1-2-2-1">
+<p>
+To make sure that everything is working, send yourself some mail that will end up in whatever you set as <code>$MAILDIR</code>, and run the <code>mu4e_update_mail</code> command. You should see some notification center popups. Don't try clicking on them just yet.
+</p>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> mu4e Patch</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+Until <a href="https://github.com/djcb/mu/issues/547">this issue</a> is resolved, you need to patch <code>mu4e-view</code> so that it displays the messages that are requested from outside of emacs properly.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #99d1ce;">(</span><span style="color: #195466; font-weight: bold;">defun</span> <span style="color: #599cab;">mu4e-view</span> <span style="color: #c23127;">(</span>msg headersbuf<span style="color: #c23127;">)</span>
+  <span style="color: #2aa889;">"Display the message MSG in a new buffer, and keep in sync with HDRSBUF.</span>
+<span style="color: #2aa889;">'In sync' here means that moving to the next/previous message in</span>
+<span style="color: #2aa889;">the the message view affects HDRSBUF, as does marking etc.</span>
+
+<span style="color: #2aa889;">As a side-effect, a message that is being viewed loses its 'unread'</span>
+<span style="color: #2aa889;">marking if it still had that."</span>
+  <span style="color: #c23127;">(</span><span style="color: #195466; font-weight: bold;">let*</span> <span style="color: #33859e;">(</span><span style="color: #d26937;">(</span>embedded <span style="color: #245361;">;; </span><span style="color: #245361;">is it as an embedded msg (ie. message/rfc822 att)?</span>
+           <span style="color: #2aa889;">(</span><span style="color: #195466; font-weight: bold;">when</span> <span style="color: #c23127;">(</span>gethash <span style="color: #33859e;">(</span>mu4e-message-field msg <span style="color: #d26937;">:path</span><span style="color: #33859e;">)</span>
+                   mu4e~path-parent-docid-map<span style="color: #c23127;">)</span> t<span style="color: #2aa889;">)</span><span style="color: #d26937;">)</span>
+          <span style="color: #d26937;">(</span>buf
+            <span style="color: #2aa889;">(</span><span style="color: #195466; font-weight: bold;">if</span> embedded
+              <span style="color: #c23127;">(</span>mu4e~view-embedded-winbuf<span style="color: #c23127;">)</span>
+              <span style="color: #c23127;">(</span>get-buffer-create mu4e~view-buffer-name<span style="color: #c23127;">)</span><span style="color: #2aa889;">)</span><span style="color: #d26937;">)</span><span style="color: #33859e;">)</span>
+    <span style="color: #245361;">;; </span><span style="color: #245361;">note: mu4e~view-mark-as-read will pseudo-recursively call mu4e-view again</span>
+    <span style="color: #245361;">;; </span><span style="color: #245361;">by triggering mu4e~view again as it marks the message as read</span>
+    <span style="color: #33859e;">(</span><span style="color: #195466; font-weight: bold;">with-current-buffer</span> buf
+      <span style="color: #d26937;">(</span>switch-to-buffer buf<span style="color: #d26937;">)</span>
+      <span style="color: #d26937;">(</span>setq mu4e~view-msg msg<span style="color: #d26937;">)</span>
+      <span style="color: #245361;">;;                           </span><span style="color: #245361;">|</span>
+      <span style="color: #245361;">;; </span><span style="color: #245361;">This is the relevant line v</span>
+      <span style="color: #d26937;">(</span><span style="color: #195466; font-weight: bold;">when</span> t <span style="color: #245361;">;;</span><span style="color: #245361;">(or embedded (not (mu4e~view-mark-as-read msg)))</span>
+        <span style="color: #2aa889;">(</span><span style="color: #195466; font-weight: bold;">let</span> <span style="color: #c23127;">(</span><span style="color: #33859e;">(</span>inhibit-read-only t<span style="color: #33859e;">)</span><span style="color: #c23127;">)</span>
+          <span style="color: #c23127;">(</span>erase-buffer<span style="color: #c23127;">)</span>
+          <span style="color: #c23127;">(</span>mu4e~delete-all-overlays<span style="color: #c23127;">)</span>
+          <span style="color: #c23127;">(</span>insert <span style="color: #33859e;">(</span>mu4e-view-message-text msg<span style="color: #33859e;">)</span><span style="color: #c23127;">)</span>
+          <span style="color: #c23127;">(</span>goto-char <span style="color: #33859e;">(</span>point-min<span style="color: #33859e;">)</span><span style="color: #c23127;">)</span>
+          <span style="color: #c23127;">(</span>mu4e~fontify-cited<span style="color: #c23127;">)</span>
+          <span style="color: #c23127;">(</span>mu4e~fontify-signature<span style="color: #c23127;">)</span>
+          <span style="color: #c23127;">(</span>mu4e~view-make-urls-clickable<span style="color: #c23127;">)</span>       
+          <span style="color: #c23127;">(</span>mu4e~view-show-images-maybe msg<span style="color: #c23127;">)</span>
+          <span style="color: #c23127;">(</span>setq
+            mu4e~view-buffer buf
+            mu4e~view-headers-buffer headersbuf<span style="color: #c23127;">)</span>
+          <span style="color: #c23127;">(</span><span style="color: #195466; font-weight: bold;">when</span> embedded <span style="color: #33859e;">(</span>local-set-key <span style="color: #2aa889;">"q"</span> 'kill-buffer-and-window<span style="color: #33859e;">)</span><span style="color: #c23127;">)</span>
+          <span style="color: #c23127;">(</span>mu4e-view-mode<span style="color: #c23127;">)</span><span style="color: #2aa889;">)</span><span style="color: #d26937;">)</span><span style="color: #33859e;">)</span><span style="color: #c23127;">)</span><span style="color: #99d1ce;">)</span>
+</pre>
+</div>
+</div>
+<ol class="org-ol"><li><a id="sec-1-2-3-1" name="sec-1-2-3-1"></a>Testing alerting<br  /><div class="outline-text-5" id="text-1-2-3-1">
+<p>
+Test alerting as before, but this time click on one of the notifications. The operating systems focus should be shifted to emacs, and the relevant email should be displayed.
+</p>
+</div>
+</li></ol>
+</div>
+<div id="outline-container-sec-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> Make a LaunchAgent</h4>
+<div class="outline-text-4" id="text-1-2-4">
+<p>
+Save the following to <code>$HOME/Library/LaunchAgents/org.imalison.mu4e-update-mail</code> (make sure to give it <code>chmod 644</code> permissions)
+</p>
+<div class="org-src-container">
+
+<pre class="src src-xml">&lt;?<span style="color: #195466; font-weight: bold;">xml</span> <span style="color: #599cab;">version</span>=<span style="color: #2aa889;">"</span><span style="color: #2aa889;">1.0</span><span style="color: #2aa889;">"</span> <span style="color: #599cab;">encoding</span>=<span style="color: #2aa889;">"</span><span style="color: #2aa889;">UTF-8</span><span style="color: #2aa889;">"</span>?&gt;
+&lt;!<span style="color: #195466; font-weight: bold;">DOCTYPE</span> plist <span style="color: #195466; font-weight: bold;">PUBLIC</span> <span style="color: #2aa889;">"</span><span style="color: #2aa889;">-//Apple//DTD PLIST 1.0//EN</span><span style="color: #2aa889;">"</span> <span style="color: #2aa889;">"</span><span style="color: #2aa889;">http://www.apple.com/DTDs/PropertyList-1.0.dtd</span><span style="color: #2aa889;">"</span>&gt;
+&lt;<span style="color: #599cab;">plist</span> <span style="color: #599cab;">version</span>=<span style="color: #2aa889;">"</span><span style="color: #2aa889;">1.0</span><span style="color: #2aa889;">"</span>&gt;
+&lt;<span style="color: #599cab;">dict</span>&gt;
+    &lt;<span style="color: #599cab;">key</span>&gt;Label&lt;/<span style="color: #599cab;">key</span>&gt;
+    &lt;<span style="color: #599cab;">string</span>&gt;org.imalison.mu4e-update-mail&lt;/<span style="color: #599cab;">string</span>&gt;
+    &lt;<span style="color: #599cab;">key</span>&gt;ProgramArguments&lt;/<span style="color: #599cab;">key</span>&gt;
+    &lt;<span style="color: #599cab;">array</span>&gt;
+      &lt;<span style="color: #599cab;">string</span>&gt;zsh&lt;/<span style="color: #599cab;">string</span>&gt;
+      &lt;<span style="color: #599cab;">string</span>&gt;-c&lt;/<span style="color: #599cab;">string</span>&gt;
+        &lt;<span style="color: #599cab;">string</span>&gt;source ~/.zshrc &amp;&amp; mu4e_update_mail&lt;/<span style="color: #599cab;">string</span>&gt;
+    &lt;/<span style="color: #599cab;">array</span>&gt;
+    &lt;<span style="color: #599cab;">key</span>&gt;StartInterval&lt;/<span style="color: #599cab;">key</span>&gt;
+    &lt;<span style="color: #599cab;">integer</span>&gt;30&lt;/<span style="color: #599cab;">integer</span>&gt;
+    &lt;<span style="color: #599cab;">key</span>&gt;StandardOutPath&lt;/<span style="color: #599cab;">key</span>&gt;
+    &lt;<span style="color: #599cab;">string</span>&gt;/tmp/org.imalison.mu4e-update-mail.out&lt;/<span style="color: #599cab;">string</span>&gt;
+    &lt;<span style="color: #599cab;">key</span>&gt;StandardErrorPath&lt;/<span style="color: #599cab;">key</span>&gt;
+    &lt;<span style="color: #599cab;">string</span>&gt;/tmp/org.imalison.mu4e-update-mail.error&lt;/<span style="color: #599cab;">string</span>&gt;
+&lt;/<span style="color: #599cab;">dict</span>&gt;
+&lt;/<span style="color: #599cab;">plist</span>&gt;
+</pre>
+</div>
+
+<p>
+Typically, you need to log in and log out to have launchd load a new launchagent. You can also use the following functions to reload any launchagent:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">as_user</span> <span style="color: #99d1ce;">{</span>
+    <span style="color: #d26937;">local</span> <span style="color: #599cab;">user</span>=<span style="color: #2aa889;">"$1"</span>
+    <span style="color: #d26937;">local</span> <span style="color: #599cab;">user_pid</span>=$<span style="color: #c23127;">(</span>ps -axj | awk <span style="color: #2aa889;">"/^$user / {print \$2;exit}"</span><span style="color: #c23127;">)</span>
+    <span style="color: #d26937;">local</span> <span style="color: #599cab;">command</span>=<span style="color: #2aa889;">"sudo /bin/launchctl bsexec $user_pid sudo -u '$user' $2"</span>
+    <span style="color: #d26937;">eval</span> $<span style="color: #599cab;">command</span>
+<span style="color: #99d1ce;">}</span>
+
+<span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">as_current_user</span> <span style="color: #99d1ce;">{</span>
+    as_user <span style="color: #2aa889;">"$(whoami)"</span> <span style="color: #2aa889;">"$*"</span>
+<span style="color: #99d1ce;">}</span>
+
+<span style="color: #195466; font-weight: bold;">function</span> <span style="color: #599cab;">reload_user_agent</span> <span style="color: #99d1ce;">{</span>
+    as_current_user /bin/launchctl unload <span style="color: #2aa889;">"$1"</span>
+    as_current_user /bin/launchctl load <span style="color: #2aa889;">"$1"</span>
+<span style="color: #99d1ce;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Ivan Malison</p>
+<p class="date">Created: 2014-12-20 Sat 00:22</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
